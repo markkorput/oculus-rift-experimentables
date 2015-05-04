@@ -88,3 +88,10 @@ void FaceCollector::threadedFunction(){
     blobs = finder.blobs;
     unlock();
 }
+
+vector<ofxCvBlob>& FaceCollector::getBlobs(){
+//    while(!lock())
+//        sleep(1);
+//    unlock();
+    return blobs;
+}

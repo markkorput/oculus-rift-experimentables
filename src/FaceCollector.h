@@ -39,6 +39,8 @@ public:
     void draw();
 
     void threadedFunction();
+    vector<ofxCvBlob>& getBlobs();
+    
 
 protected: // attributes
     int width, height;

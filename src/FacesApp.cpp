@@ -28,6 +28,7 @@ void FacesApp::defineParams(){
     RUI_DEFINE_VAR_WV(float, "Faces::rotX", 0, -1000, 1000);
     RUI_DEFINE_VAR_WV(float, "Faces::rotY", 0, -1000, 1000);
     RUI_DEFINE_VAR_WV(float, "Faces::rotZ", 0, -1000, 1000);
+    RUI_DEFINE_VAR_WV(float, "Faces::ellipseFactor", 1.2, 0.0, 3.0);
     FACECOLLECTOR.setupParams();
 }
 
@@ -73,14 +74,28 @@ void FacesApp::draw(){
 
 void FacesApp::drawScene(){
     ofPushMatrix();
-        glTranslatef(RUI_VAR(float, "Faces::translateX"),
-                     RUI_VAR(float, "Faces::translateY"),
-                     RUI_VAR(float, "Faces::translateZ"));
-        ofRotateX(RUI_VAR(float, "Faces::rotX"));
-        ofRotateY(RUI_VAR(float, "Faces::rotY"));
-        ofRotateZ(RUI_VAR(float, "Faces::rotZ"));
 
-        FACECOLLECTOR.draw();
+    glTranslatef(RUI_VAR(float, "Faces::translateX"),
+                 RUI_VAR(float, "Faces::translateY"),
+                 RUI_VAR(float, "Faces::translateZ"));
+    ofRotateX(RUI_VAR(float, "Faces::rotX"));
+    ofRotateY(RUI_VAR(float, "Faces::rotY"));
+    ofRotateZ(RUI_VAR(float, "Faces::rotZ"));
+
+    ofSetColor(255);
+    FACECOLLECTOR.draw();
+
+    vector<ofxCvBlob> blobs = FACECOLLECTOR.getBlobs();
+    ofFill();
+    ofSetColor(0);
+    float factor = RUI_VAR(float, "Faces::ellipseFactor");
+
+    for(int i = 0; i < blobs.size(); i++) {
+        ofRectangle rect = blobs[i].boundingRect;
+        rect.scaleFromCenter(factor);
+        ofEllipse(rect.x+rect.width/2, rect.y+rect.height/2, rect.width, rect.height);
+    }
+
     ofPopMatrix();
 }
 
