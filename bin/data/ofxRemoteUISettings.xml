@@ -2,4 +2,6 @@
 <OFX_REMOTE_UI_PARAMS>
     <REMOTEUI_PARAM_BOOL paramName="app-fullscreen">0</REMOTEUI_PARAM_BOOL>
     <REMOTEUI_PARAM_STRING paramName="audio-path">audio/weedflute_mac.wav</REMOTEUI_PARAM_STRING>
+    <REMOTEUI_PARAM_FLOAT paramName="FaceCollector::delay">0.500000000</REMOTEUI_PARAM_FLOAT>
+    <REMOTEUI_PARAM_STRING paramName="FaceCollector::xml_path">haarcascade_frontalface_default.xml</REMOTEUI_PARAM_STRING>
 </OFX_REMOTE_UI_PARAMS>

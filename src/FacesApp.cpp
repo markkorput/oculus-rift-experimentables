@@ -12,6 +12,7 @@
 //#include "ofxTimeMeasurements.h"
 #include "ofxRemoteUIVars.h"
 
+#include "FaceCollector.h"
 
 FacesApp::FacesApp(){
     enabled = false;
@@ -20,23 +21,29 @@ FacesApp::FacesApp(){
 void FacesApp::defineParams(){
     RUI_NEW_GROUP("Faces");
     // RUI_DEFINE_VAR_WV(string, "audio-path", "");
+
+    FACECOLLECTOR.setupParams();
 }
 
 void FacesApp::setup(){
     //oculusRift.baseCamera = &cam;
-    oculusRift.lockView = true;
-    oculusRift.setup();
+//    oculusRift.lockView = true;
+//    oculusRift.setup();
    
     //enable mouse;
     cam.begin();
     cam.end();
+
+    FACECOLLECTOR.setup();
 }
 
 void FacesApp::update(float dt){
+    FACECOLLECTOR.update(dt);
 }
 
 void FacesApp::draw(){
-    ofBackground(0);
+    //    ofBackground(0);
+    ofBackgroundGradient(ofColor(120), ofColor(170));
 
     if(oculusRift.isSetup()){
         oculusRift.beginLeftEye();
@@ -59,7 +66,7 @@ void FacesApp::draw(){
 }
 
 void FacesApp::drawScene(){
-
+    FACECOLLECTOR.draw();
 }
 
 void FacesApp::keyPressed(int key){
