@@ -10,8 +10,14 @@
 #include "ofxRemoteUIVars.h"
 
 FaceCollector::FaceCollector(){
-    width = 640;
-    height = 460;
+    givenGrabber = NULL;
+    grabber = NULL;
+    setup();
+}
+
+FaceCollector::FaceCollector(ofVideoGrabber *videoGrabber){
+    givenGrabber = videoGrabber;
+    grabber = NULL;
     setup();
 }
 
@@ -22,9 +28,15 @@ void FaceCollector::setupParams(){
 }
 
 void FaceCollector::setup(){
-    vidGrabber.initGrabber(width, height);
-    colorImage.allocate(width, height);
-    grayImage.allocate(width, height);
+    if(givenGrabber){
+        grabber = givenGrabber;
+    } else {
+        vidGrabber.initGrabber(640, 480);
+        grabber = &vidGrabber;
+    }
+    
+    colorImage.allocate(grabber->getWidth(), grabber->getHeight());
+    grayImage.allocate(grabber->getWidth(), grabber->getHeight());
     grayImage.setUseTexture(false);
     string xmlPath = RUI_VAR(string, "FaceCollector::xml_path");
     if(xmlPath != "")
@@ -40,7 +52,7 @@ void FaceCollector::update(float dt){
     if(!vidGrabber.isFrameNew())
         return;
 
-    colorImage.setFromPixels(vidGrabber.getPixels(), width, height);
+    colorImage.setFromPixels(vidGrabber.getPixels(), grabber->getWidth(), grabber->getHeight());
     grayImage = colorImage;
 
     if(delayAnim.isAnimating()){
@@ -61,7 +73,7 @@ void FaceCollector::draw(){
     for(int i = 0; i < blobs.size(); i++) {
         ofxCvBlob blob = blobs[i];
         //printf("found: %i, %i %ix%i\n",
-        //       cur.x, cur.y, cur.width, cur.height);
+        //       cur.x, cur.y, cur.width, cur.grabber->getHeight());
         ofSetColor(255);
         ofNoFill();
         ofRect(blob.boundingRect);

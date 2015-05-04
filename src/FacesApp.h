@@ -20,7 +20,7 @@ public:
     void setup();
     void update(float dt);
     void draw();
-
+    void paramsUpdated();
     void drawScene();
     void keyPressed(int key);
     void dragEvent(ofDragInfo &dragInfo);

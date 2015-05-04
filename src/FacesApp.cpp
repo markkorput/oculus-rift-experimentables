@@ -20,15 +20,21 @@ FacesApp::FacesApp(){
 
 void FacesApp::defineParams(){
     RUI_NEW_GROUP("Faces");
-    // RUI_DEFINE_VAR_WV(string, "audio-path", "");
-
+    // RUI_DEFINE_VAR_WV(int, "Faces::camWidth", 640, 0, 1920);
+    // RUI_DEFINE_VAR_WV(int, "Faces::camHeight", 460, 0, 1080);
+    RUI_DEFINE_VAR_WV(float, "Faces::translateX", 0, -1000, 1000);
+    RUI_DEFINE_VAR_WV(float, "Faces::translateY", 0, -1000, 1000);
+    RUI_DEFINE_VAR_WV(float, "Faces::translateZ", 0, -1000, 1000);
+    RUI_DEFINE_VAR_WV(float, "Faces::rotX", 0, -1000, 1000);
+    RUI_DEFINE_VAR_WV(float, "Faces::rotY", 0, -1000, 1000);
+    RUI_DEFINE_VAR_WV(float, "Faces::rotZ", 0, -1000, 1000);
     FACECOLLECTOR.setupParams();
 }
 
 void FacesApp::setup(){
     //oculusRift.baseCamera = &cam;
-//    oculusRift.lockView = true;
-//    oculusRift.setup();
+    oculusRift.lockView = true;
+    oculusRift.setup();
    
     //enable mouse;
     cam.begin();
@@ -42,8 +48,8 @@ void FacesApp::update(float dt){
 }
 
 void FacesApp::draw(){
-    //    ofBackground(0);
-    ofBackgroundGradient(ofColor(120), ofColor(170));
+    ofBackground(0);
+    // ofBackgroundGradient(ofColor(120), ofColor(170));
 
     if(oculusRift.isSetup()){
         oculusRift.beginLeftEye();
@@ -66,7 +72,20 @@ void FacesApp::draw(){
 }
 
 void FacesApp::drawScene(){
-    FACECOLLECTOR.draw();
+    ofPushMatrix();
+        glTranslatef(RUI_VAR(float, "Faces::translateX"),
+                     RUI_VAR(float, "Faces::translateY"),
+                     RUI_VAR(float, "Faces::translateZ"));
+        ofRotateX(RUI_VAR(float, "Faces::rotX"));
+        ofRotateY(RUI_VAR(float, "Faces::rotY"));
+        ofRotateZ(RUI_VAR(float, "Faces::rotZ"));
+
+        FACECOLLECTOR.draw();
+    ofPopMatrix();
+}
+
+void FacesApp::paramsUpdated(){
+    
 }
 
 void FacesApp::keyPressed(int key){

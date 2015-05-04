@@ -61,7 +61,7 @@ void ofApp::update(){
     if(bRecalcNow){
         // TODO: perform post-param-change updates
         ofSetFullscreen(RUI_VAR(bool, "app-fullscreen"));
-        
+        if(facesApp && facesApp->enabled) facesApp->paramsUpdated();
     }
 
     if(soundBallsApp && soundBallsApp->enabled) soundBallsApp->update(dt);

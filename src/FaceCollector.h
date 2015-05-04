@@ -18,6 +18,7 @@
 class FaceCollector : public ofThread {
 public:
     FaceCollector();
+    FaceCollector(ofVideoGrabber *videoGrabber);
     // ~FaceCollector();
     
 public: // singleton instance stuff
@@ -41,7 +42,7 @@ public:
 
 protected: // attributes
     int width, height;
-    ofVideoGrabber vidGrabber;
+    ofVideoGrabber vidGrabber, *givenGrabber, *grabber;
     ofxCvColorImage colorImage;
     ofxCvGrayscaleImage grayImage;
     ofxCvHaarFinder finder;
