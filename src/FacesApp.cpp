@@ -42,10 +42,38 @@ void FacesApp::setup(){
     cam.end();
 
     FACECOLLECTOR.setup();
+    ofVideoGrabber* grabber = FACECOLLECTOR.getVideoGrabber();
+    fbo.allocate(grabber->getWidth(), grabber->getHeight());
+
+    maskShader.load("maskShader");
 }
 
 void FacesApp::update(float dt){
     FACECOLLECTOR.update(dt);
+    
+    fbo.begin();
+    ofBackground(255,255,255,0);
+    // ofBackground(0);
+    
+    
+    vector<ofxCvBlob> blobs = FACECOLLECTOR.getBlobs();
+    float factor = RUI_VAR(float, "Faces::ellipseFactor");
+
+    for(int i = 0; i < blobs.size(); i++) {
+        ofRectangle rect = blobs[i].boundingRect;
+        rect.scaleFromCenter(factor);
+        ofFill();
+        maskShader.begin();
+        ofRect(rect);
+        // ofEllipse(rect.x+rect.width/2, rect.y+rect.height/2, rect.width, rect.height);
+        maskShader.end();
+
+
+    }
+    
+
+    fbo.end();
+
 }
 
 void FacesApp::draw(){
@@ -84,18 +112,7 @@ void FacesApp::drawScene(){
 
     ofSetColor(255);
     FACECOLLECTOR.draw();
-
-    vector<ofxCvBlob> blobs = FACECOLLECTOR.getBlobs();
-    ofFill();
-    ofSetColor(0);
-    float factor = RUI_VAR(float, "Faces::ellipseFactor");
-
-    for(int i = 0; i < blobs.size(); i++) {
-        ofRectangle rect = blobs[i].boundingRect;
-        rect.scaleFromCenter(factor);
-        ofEllipse(rect.x+rect.width/2, rect.y+rect.height/2, rect.width, rect.height);
-    }
-
+    fbo.draw(0,0);
     ofPopMatrix();
 }
 

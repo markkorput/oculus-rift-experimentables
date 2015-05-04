@@ -39,7 +39,10 @@ public:
     void draw();
 
     void threadedFunction();
+
     vector<ofxCvBlob>& getBlobs();
+    ofVideoGrabber* getVideoGrabber(){ return grabber; }
+    ofxCvColorImage* getColorImage(){ return &colorImage; }
     
 
 protected: // attributes

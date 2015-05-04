@@ -32,6 +32,8 @@ protected:
     ofxOculusDK2		oculusRift;
     ofEasyCam			cam;
     // ofSoundPlayer soundPlayer;
+    ofFbo fbo;
+    ofShader maskShader;
 };
 
 
