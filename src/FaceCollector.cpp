@@ -69,7 +69,7 @@ void FaceCollector::update(float dt){
 
 void FaceCollector::draw(){
     colorImage.draw(0,0);
-    if(!lock()) return;
+    //if(!lock()) return;
     for(int i = 0; i < blobs.size(); i++) {
         ofxCvBlob blob = blobs[i];
         //printf("found: %i, %i %ix%i\n",
@@ -78,15 +78,15 @@ void FaceCollector::draw(){
         ofNoFill();
         ofRect(blob.boundingRect);
     }
-    unlock();
+    //unlock();
 }
 
 void FaceCollector::threadedFunction(){
     finder.findHaarObjects(grayImage); // an ofxCvGrayscaleImage
-    while(!lock())
-        sleep(10);
+    //while(!lock())
+    //    sleep(10);
     blobs = finder.blobs;
-    unlock();
+    //unlock();
 }
 
 vector<ofxCvBlob>& FaceCollector::getBlobs(){

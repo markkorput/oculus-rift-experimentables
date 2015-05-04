@@ -43,36 +43,30 @@ void FacesApp::setup(){
 
     FACECOLLECTOR.setup();
     ofVideoGrabber* grabber = FACECOLLECTOR.getVideoGrabber();
-    fbo.allocate(grabber->getWidth(), grabber->getHeight());
-
+    facesFbo.allocate(grabber->getWidth(), grabber->getHeight());
     maskShader.load("maskShader");
 }
 
 void FacesApp::update(float dt){
     FACECOLLECTOR.update(dt);
     
-    fbo.begin();
+    // create mask
+    facesFbo.begin();
     ofBackground(255,255,255,0);
-    // ofBackground(0);
-    
-    
+    //ofBackground(0);
+
     vector<ofxCvBlob> blobs = FACECOLLECTOR.getBlobs();
     float factor = RUI_VAR(float, "Faces::ellipseFactor");
+    ofFill();
+    ofSetColor(255);
 
     for(int i = 0; i < blobs.size(); i++) {
         ofRectangle rect = blobs[i].boundingRect;
         rect.scaleFromCenter(factor);
-        ofFill();
-        maskShader.begin();
-        ofRect(rect);
-        // ofEllipse(rect.x+rect.width/2, rect.y+rect.height/2, rect.width, rect.height);
-        maskShader.end();
-
-
+        ofEllipse(rect.x+rect.width/2, rect.y+rect.height/2, rect.width, rect.height);
     }
-    
 
-    fbo.end();
+    facesFbo.end();
 
 }
 
@@ -111,8 +105,15 @@ void FacesApp::drawScene(){
     ofRotateZ(RUI_VAR(float, "Faces::rotZ"));
 
     ofSetColor(255);
-    FACECOLLECTOR.draw();
-    fbo.draw(0,0);
+    // FACECOLLECTOR.draw();
+    ofxCvColorImage* img = FACECOLLECTOR.getColorImage();
+    ofFill();
+
+    maskShader.begin();
+    maskShader.setUniformTexture("imageMask", facesFbo.getTextureReference(), 1);
+    img->draw(0,0);
+    maskShader.end();
+    
     ofPopMatrix();
 }
 
