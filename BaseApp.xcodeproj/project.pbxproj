@@ -88,6 +88,7 @@
 		4D7A99301A923C1300BA5AC7 /* Util_Interface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D7A98DE1A923C1300BA5AC7 /* Util_Interface.cpp */; };
 		4D7A99311A923C1300BA5AC7 /* Util_LatencyTest2Reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D7A98E01A923C1300BA5AC7 /* Util_LatencyTest2Reader.cpp */; };
 		4D7A99321A923C1300BA5AC7 /* Util_Render_Stereo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D7A98E31A923C1300BA5AC7 /* Util_Render_Stereo.cpp */; };
+		4D7E40FF1AF7830100F71D10 /* SoundBallsApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D7E40FD1AF7830100F71D10 /* SoundBallsApp.cpp */; };
 		6641CCF719B0F2CA00375E34 /* ofApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6641CCF519B0F2CA00375E34 /* ofApp.cpp */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
@@ -366,6 +367,8 @@
 		4D7A98E21A923C1300BA5AC7 /* Util_LatencyTest2State.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Util_LatencyTest2State.h; sourceTree = "<group>"; };
 		4D7A98E31A923C1300BA5AC7 /* Util_Render_Stereo.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Util_Render_Stereo.cpp; sourceTree = "<group>"; };
 		4D7A98E41A923C1300BA5AC7 /* Util_Render_Stereo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Util_Render_Stereo.h; sourceTree = "<group>"; };
+		4D7E40FD1AF7830100F71D10 /* SoundBallsApp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoundBallsApp.cpp; sourceTree = "<group>"; };
+		4D7E40FE1AF7830100F71D10 /* SoundBallsApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundBallsApp.h; sourceTree = "<group>"; };
 		6641CCF519B0F2CA00375E34 /* ofApp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofApp.cpp; sourceTree = "<group>"; };
 		6641CCF619B0F2CA00375E34 /* ofApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofApp.h; sourceTree = "<group>"; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../openFrameworks/libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
@@ -1013,6 +1016,15 @@
 			path = Util;
 			sourceTree = "<group>";
 		};
+		4D7E40F91AF782A500F71D10 /* SoundBalls */ = {
+			isa = PBXGroup;
+			children = (
+				4D7E40FD1AF7830100F71D10 /* SoundBallsApp.cpp */,
+				4D7E40FE1AF7830100F71D10 /* SoundBallsApp.h */,
+			);
+			name = SoundBalls;
+			sourceTree = "<group>";
+		};
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
@@ -1090,6 +1102,7 @@
 		E4B69E1C0A3A1BDC003C02F2 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				4D7E40F91AF782A500F71D10 /* SoundBalls */,
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				6641CCF519B0F2CA00375E34 /* ofApp.cpp */,
 				6641CCF619B0F2CA00375E34 /* ofApp.h */,
@@ -1251,6 +1264,7 @@
 				4D7A99001A923C1300BA5AC7 /* CAPI_GL_DistortionRenderer.cpp in Sources */,
 				4D7A99191A923C1300BA5AC7 /* OVR_System.cpp in Sources */,
 				4D3096971A62031800B27E84 /* ofxSuperLog.cpp in Sources */,
+				4D7E40FF1AF7830100F71D10 /* SoundBallsApp.cpp in Sources */,
 				4D7A990D1A923C1300BA5AC7 /* OVR_File.cpp in Sources */,
 				4D30969F1A62031A00B27E84 /* ofxTimeMeasurements.cpp in Sources */,
 				4D7A99231A923C1300BA5AC7 /* OVR_Session.cpp in Sources */,

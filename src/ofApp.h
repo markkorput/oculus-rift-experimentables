@@ -1,17 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
-
-#include "ofxOculusDK2.h"
-
-typedef struct{
-    ofColor color;
-    ofVec3f pos;
-    ofVec3f floatPos;
-    float radius;
-    bool bMouseOver;
-    bool bGazeOver;
-} DemoSphere;
+#include "SoundBallsApp.h"
 
 
 class ofApp : public ofBaseApp{
@@ -32,25 +22,5 @@ public:
     void gotMessage(ofMessage msg);
 	void exit();
     
-    void drawScene();
-    bool loadAudio(string path);
-    ofxOculusDK2		oculusRift;
-    
-    ofLight				light;
-    ofEasyCam			cam;
-    bool showOverlay;
-    bool predictive;
-    vector<DemoSphere> demos;
-    
-    ofVec3f cursor2D;
-    ofVec3f cursor3D;
-    
-    ofVec3f cursorRift;
-    ofVec3f demoRift;
-    
-    ofVec3f cursorGaze;
-    
-    ofSoundPlayer soundPlayer;
-    float playbackSpeed;
-
+    SoundBallsApp *soundBallsApp;
 };
