@@ -26,3 +26,7 @@
 *.exe
 *.out
 *.app
+
+
+bin/data/log.txt
+bin/data/audio
