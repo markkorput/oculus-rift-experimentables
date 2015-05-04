@@ -2,7 +2,7 @@
 
 #include "ofMain.h"
 #include "SoundBallsApp.h"
-
+#include "FacesApp.h"
 
 class ofApp : public ofBaseApp{
 
@@ -23,4 +23,5 @@ public:
 	void exit();
     
     SoundBallsApp *soundBallsApp;
+    FacesApp *facesApp;
 };

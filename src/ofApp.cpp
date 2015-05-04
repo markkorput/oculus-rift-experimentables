@@ -35,20 +35,23 @@ void ofApp::setup(){
     // TIME_SAMPLE_ENABLE();
 
     soundBallsApp = new SoundBallsApp();
-    soundBallsApp->enabled = true;
+    soundBallsApp->enabled = false;
     
+    facesApp = new FacesApp();
+    facesApp->enabled = true;
+
     // setup ofxRemoteUI
     RUI_SETUP();
     RUI_SET_CALLBACK(ruiServerCallback);
     // setup params here
     RUI_NEW_GROUP("App");
     RUI_DEFINE_VAR_WV(bool, "app-fullscreen", false);
-    if(soundBallsApp)
-        soundBallsApp->defineParams();
+    if(soundBallsApp) soundBallsApp->defineParams();
+    if(facesApp) facesApp->defineParams();
     RUI_LOAD_FROM_XML();
 
-    if(soundBallsApp && soundBallsApp->enabled)
-        soundBallsApp->setup();
+    if(soundBallsApp && soundBallsApp->enabled) soundBallsApp->setup();
+    if(facesApp && facesApp->enabled) facesApp->setup();
 }
 
 //--------------------------------------------------------------
@@ -61,20 +64,20 @@ void ofApp::update(){
         
     }
 
-    if(soundBallsApp && soundBallsApp->enabled)
-        soundBallsApp->update(dt);
+    if(soundBallsApp && soundBallsApp->enabled) soundBallsApp->update(dt);
+    if(facesApp && facesApp->enabled) facesApp->update(dt);
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    if(soundBallsApp && soundBallsApp->enabled)
-        soundBallsApp->draw();
+    if(soundBallsApp && soundBallsApp->enabled) soundBallsApp->draw();
+    if(facesApp && facesApp->enabled) facesApp->draw();
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-    if(soundBallsApp && soundBallsApp->enabled)
-        soundBallsApp->keyPressed(key);
+    if(soundBallsApp && soundBallsApp->enabled) soundBallsApp->keyPressed(key);
+    if(facesApp && facesApp->enabled) facesApp->keyPressed(key);
 
     switch(key){
         case 'f':
@@ -127,6 +130,6 @@ void ofApp::gotMessage(ofMessage msg){
 
 //--------------------------------------------------------------
 void ofApp::dragEvent(ofDragInfo dragInfo){
-    if(soundBallsApp && soundBallsApp->enabled)
-        soundBallsApp->dragEvent(dragInfo);
+    if(soundBallsApp && soundBallsApp->enabled) soundBallsApp->dragEvent(dragInfo);
+    if(facesApp && facesApp->enabled) facesApp->dragEvent(dragInfo);
 }
